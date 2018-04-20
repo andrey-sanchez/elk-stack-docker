@@ -1,0 +1,12 @@
+## https://github.com/elastic/elasticsearch-docker/blob/master/build/elasticsearch/elasticsearch.yml
+
+#cluster.name: "elasticsearch-cluster"
+#node.name: "es-node-1"
+#network.host: 0.0.0.0
+#http.port: 9200
+#discovery.zen.ping.unicast.hosts: ["host1", "host2"]
+#discovery.zen.minimum_master_nodes: 1
+#gateway.recover_after_nodes: 3
+#node.master: true
+#node.data: true
+#xpack.license.self_generated.type: basic
