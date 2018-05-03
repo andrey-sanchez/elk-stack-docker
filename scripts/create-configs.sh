@@ -38,5 +38,4 @@ with open("elasticsearch/config/elasticsearch.yml", "a") as config:
     config.write("gateway.recover_after_nodes: " + `quorum` + "\n")
     config.write("node.master: true\n")
     config.write("node.data: true\n")
-    config.write("xpack.license.self_generated.type: basic\n")
     

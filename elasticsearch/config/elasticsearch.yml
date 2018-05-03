@@ -1,0 +1,9 @@
+cluster.name: "elk"
+node.name: "pmitn006260"
+network.host: 0.0.0.0
+http.port: 9200
+discovery.zen.ping.unicast.hosts: ["elasticsearch"]
+discovery.zen.minimum_master_nodes: 1
+gateway.recover_after_nodes: 1
+node.master: true
+node.data: true

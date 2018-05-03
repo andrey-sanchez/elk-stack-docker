@@ -9,4 +9,3 @@
 #gateway.recover_after_nodes: 3
 #node.master: true
 #node.data: true
-#xpack.license.self_generated.type: basic

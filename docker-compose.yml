@@ -8,12 +8,10 @@ services:
       - "9200:9200"
       - "9300:9300"
     volumes:
-      - ./../data/elastic-data:/usr/share/elasticsearch/data
-      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - /home/despegar/data/elastic-data:/usr/share/elasticsearch/data
     environment: []
       #- ES_JAVA_OPTS: "-Xmx2g -Xms2g"
-      #- discovery.type: "single-node"
-    restart: always
+    #restart: always
     networks: ["elk"]
   logstash:
     build: ./logstash
@@ -22,20 +20,24 @@ services:
     ports: 
       - "5000:5000"
       - "4560:4560"
-    volumes:
-      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
-      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
     networks: ["elk"]
-    restart: always
+    #restart: always
     depends_on: ["elasticsearch"]
   kibana:
     build: ./kibana
     image: elk-stack-kibana:6.2.3
     container_name: elk-stack-kibana
     ports: 
-      - "5601:5601"
+      - "9290:5601"
     networks: ["elk"]
-    restart: always
+    #restart: always
     depends_on: ["elasticsearch"]
+  metricbeat:
+    build: ./metricbeat
+    image: elk-stack-metrobeat:6.2.3
+    container_name: elk-stack-metricbeat
+    networks: ["elk"]
+    #restart: always
+    depends_on: ["elasticsearch", "kibana"]
 networks: 
   elk:
