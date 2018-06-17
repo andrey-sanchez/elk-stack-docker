@@ -1,0 +1,36 @@
+plugins {
+   id 'maven'
+   id 'distribution'
+   id 'net.researchgate.release' version '2.6.0'
+}
+
+group = 'com.despegar.p13n'
+description = """"""
+
+buildDir = '.build'
+
+release {
+
+}
+
+distributions {
+    main {
+        contents {
+            from { 'app' }
+            into { '/app' }
+        }
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "http://vmtilcara.servers.despegar.it:8080/nexus/content/repositories/releases")
+            snapshotRepository(url: "http://vmtilcara.servers.despegar.it:8080/nexus/content/repositories/snapshots")
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}

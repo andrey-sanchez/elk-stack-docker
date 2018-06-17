@@ -1,0 +1,5 @@
+#!/bin/bash -x
+set -e
+cd "$(dirname "$0")"
+./gradlew clean build
+cp .build/distributions/* .build/

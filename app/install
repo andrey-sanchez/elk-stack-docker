@@ -1,0 +1,22 @@
+#!/bin/bash -x
+cd $(dirname $0)
+
+mkdir -p ~/.docker
+
+if ! [ -x "$(command -v docker)" ]; then
+  echo "Installing docker..."
+  ./install-docker.sh
+fi
+
+if ! [ -x "$(command -v docker-compose)" ]; then
+  echo "Installing docker-compose..."
+  ./install-docker-compose.sh
+fi
+
+echo "Pulling docker images..."
+./pull-images.sh
+
+echo "Updating vm.max_map_count"
+./env-configs.sh
+
+echo "Install success"

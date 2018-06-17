@@ -1,0 +1,44 @@
+version: '2'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:${ELK_VERSION}
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - ${DATA_DIR}/elastic-data:/usr/share/elasticsearch/data
+      - ${APP_DIR}/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    environment: []
+      #- ES_JAVA_OPTS: "-Xmx2g -Xms2g"
+    networks: ["elk"]
+    restart: always
+  logstash:
+    image: docker.elastic.co/logstash/logstash-oss:${ELK_VERSION}
+    ports:
+      - "5000:5000"
+      - "4560:4560"
+      - "5001:5001"
+    volumes:
+      - ${APP_DIR}/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ${APP_DIR}/config/pipeline.conf:/usr/share/logstash/pipeline/logstash.conf
+    networks: ["elk"]
+    restart: always
+    depends_on: ["elasticsearch"]
+  kibana:
+    image: docker.elastic.co/kibana/kibana-oss:${ELK_VERSION}
+    ports:
+      - "9290:5601"
+    networks: ["elk"]
+    restart: always
+    depends_on: ["elasticsearch"]
+  curator:
+    build: ./curator
+    image: curator
+    volumes:
+      - ${APP_DIR}/config/curator-actions.yml:/curator/actions.yml
+      - ${APP_DIR}/config/curator-config.yml:/curator/config.yml
+    networks: ["elk"]
+    restart: always
+    depends_on: ["elasticsearch"]
+networks:
+  elk:

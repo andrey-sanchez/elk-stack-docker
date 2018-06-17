@@ -1,0 +1,9 @@
+cluster.name: "elk"
+node.name: "elk-00"
+network.host: 0.0.0.0
+http.port: 9200
+discovery.zen.ping.unicast.hosts: ["localhost"]
+discovery.zen.minimum_master_nodes: 1
+gateway.recover_after_nodes: 1
+node.master: true
+node.data: true

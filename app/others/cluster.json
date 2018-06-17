@@ -1,0 +1,12 @@
+{
+    "environment": "prod",
+    "clusterName": "elk",
+    "instances": [],
+    "instanceInfo": {
+        "name": "elk-00",
+        "publicAddr": "127.0.0.1",
+        "privateAddr": "127.0.0.1",
+        "fqdn": "localhost"
+    },
+    "context": "elk"
+}

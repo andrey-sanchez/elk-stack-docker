@@ -1,0 +1,22 @@
+#!/bin/bash -x
+currentDir=$(pwd)
+cd ..
+parentDir=$(pwd)
+cd ${currentDir}
+appName=elk-stack-docker
+
+export ELK_VERSION=6.3.0
+export DATA_DIR=${parentDir}/data
+export APP_DIR=${parentDir}/app
+
+chmod -R 777 ${DATA_DIR}
+mkdir -p ${DATA_DIR}/elastic-data
+
+function waitFor {
+    host=$1
+    port=$2
+    while ! nc -z ${host} ${port} 2>/dev/null
+    do
+      sleep 1
+    done
+}
